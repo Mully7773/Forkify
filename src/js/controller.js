@@ -2,6 +2,10 @@
 // Importing icons because the JS icons contain the old file path whereas Parcel uses a different file path in the dist folder
 import icons from 'url:../img/icons.svg'; //Parcel 2
 console.log(icons);
+// Polyfilling everything else
+import 'core-js/stable';
+// Polyfilling async/await
+import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
 
