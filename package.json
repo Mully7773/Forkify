@@ -1,0 +1,24 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mully7773/Forkify.git"
+  },
+  "author": "Nick Mullenmeister",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mully7773/Forkify/issues"
+  },
+  "homepage": "https://github.com/Mully7773/Forkify#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0",
+    "sass": "^1.54.9"
+  }
+}
