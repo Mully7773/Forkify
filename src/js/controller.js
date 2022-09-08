@@ -36,6 +36,9 @@ const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
     console.log(id);
+
+    if (!id) return;
+
     // Loading recipe
     renderSpinner(recipeContainer);
     const res = await fetch(
@@ -169,4 +172,8 @@ const showRecipe = async function () {
 
 // showRecipe();
 
-window.addEventListener('hashchange', showRecipe);
+// DRY code for two different event listeners using the same callback function - note 'load' is necessary for changing tabs, etc.
+['hashchange', 'load'].forEach(e => window.addEventListener(e, showRecipe));
+
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
