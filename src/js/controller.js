@@ -6,8 +6,6 @@ import 'core-js/stable';
 // Polyfilling async/await
 import 'regenerator-runtime/runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
