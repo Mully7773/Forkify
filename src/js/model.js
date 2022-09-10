@@ -1,4 +1,5 @@
 import { API_URL } from './config.js';
+import { getJSON } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -6,11 +7,8 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`);
-    const data = await res.json();
+    const data = await getJSON(`${API_URL}/${id}`);
 
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    console.log(res, data);
     // Destructuring recipe out of the data object so...
     const { recipe } = data.data;
     // ...we make a copy of the object and rename from snake_case to camelCase and update state.
@@ -26,6 +24,7 @@ export const loadRecipe = async function (id) {
     };
     console.log(state.recipe);
   } catch (err) {
-    alert(err);
+    // Temporary error handling
+    console.error(`${err} 💥💥💥`);
   }
 };
