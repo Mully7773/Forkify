@@ -33,14 +33,18 @@ const controlRecipes = async function () {
     // Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    alert(err);
+    console.log(err);
   }
 };
 
 // controlRecipes();
 
-// DRY code for two different event listeners using the same callback function - note 'load' is necessary for changing tabs, etc.
-['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipes));
-
 // window.addEventListener('hashchange', controlRecipes);
 // window.addEventListener('load', controlRecipes);
+
+// Publisher/Subscriber Pattern
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+
+init();

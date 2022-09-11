@@ -30,6 +30,11 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   };
 
+  addHandlerRender(handler) {
+    // DRY code for two different event listeners using the same callback function - note 'load' is necessary for changing tabs, etc.
+    ['hashchange', 'load'].forEach(e => window.addEventListener(e, handler));
+  }
+
   #generateMarkup() {
     console.log(this.#data);
     return `
