@@ -8,6 +8,11 @@ import 'core-js/stable';
 // Polyfilling async/await
 import 'regenerator-runtime/runtime';
 
+// From parcel
+if (module.hot) {
+  module.hot.accept();
+}
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -48,7 +53,7 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // Render results
-    console.log(model.state.search.results);
+    // console.log(model.state.search.results);
     resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
