@@ -71,10 +71,18 @@ const controlSearchResults = async function () {
 // window.addEventListener('hashchange', controlRecipes);
 // window.addEventListener('load', controlRecipes);
 
+const controlPagination = function (goToPage) {
+  //Render new results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  //Render new pagination buttons
+  paginationView.render(model.state.search);
+};
 // Publisher/Subscriber Pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();
