@@ -14,6 +14,47 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  update(data) {
+    // if (!data || (Array.isArray(data) && data.length === 0))
+    //   return this.renderError();
+
+    this._data = data;
+    // Create new markup but not render it - compare it with current html and change the attributes that have changed
+    const newMarkup = this._generateMarkup();
+
+    // Method that converts strings into real DOM node objects - newDOM = virtual DOM
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    // console.log(newElements);
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+    console.log(curElements);
+    console.log(newElements);
+
+    newElements.forEach((newEl, i) => {
+      const curEl = curElements[i];
+      // isEqualNode compares the content of both curEl and newEl
+      console.log(curEl, newEl.isEqualNode(curEl));
+
+      // child node contains the text
+      // Updates changed Text
+      if (
+        !newEl.isEqualNode(curEl) &&
+        newEl.firstChild?.nodeValue.trim() !== ''
+      ) {
+        // console.log('😊', newEl.firstChild.nodeValue.trim());
+        curEl.textContent = newEl.textContent;
+      }
+
+      // Updates changed attributes
+      if (!newEl.isEqualNode(curEl)) {
+        // console.log(Array.from(newEl.attributes));
+        Array.from(newEl.attributes).forEach(attr =>
+          curEl.setAttribute(attr.name, attr.value)
+        );
+      }
+    });
+  }
+
   _clear() {
     this._parentElement.innerHTML = '';
   }
