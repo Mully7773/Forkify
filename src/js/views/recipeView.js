@@ -18,10 +18,13 @@ class RecipeView extends View {
 
   addHandlerUpdateServings(handler) {
     this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--tiny');
+      const btn = e.target.closest('.btn--update-servings');
       if (!btn) return;
       console.log(btn);
-      handler();
+      // Destructure data attribute - but note that we cannot convert the value to a number simultaneously
+      // const updateTo = +btn.dataset.updateTo;
+      const { updateTo } = btn.dataset;
+      if (+updateTo > 0) handler(+updateTo);
     });
   }
 
@@ -57,12 +60,16 @@ class RecipeView extends View {
             <span class="recipe__info-text">servings</span>
 
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings - 1
+              }">
                 <svg>
                   <use href="${icons}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings + 1
+              }">
                 <svg>
                   <use href="${icons}#icon-plus-circle"></use>
                 </svg>
