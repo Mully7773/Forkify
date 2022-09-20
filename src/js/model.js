@@ -30,6 +30,11 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+
+    if (state.bookmarks.some(bookmark => bookmark.id === id))
+      state.recipe.bookmarked = true;
+    else state.recipe.bookmarked = false;
+
     console.log(state.recipe);
   } catch (err) {
     // Temporary error handling
@@ -80,10 +85,21 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 
+// Common programming pattern - when we add something we want all the data, and...
 export const addBookmark = function (recipe) {
   // Add bookmark
   state.bookmarks.push(recipe);
 
-  // Mark current recipe as bookmark
+  // Mark current recipe as bookmarked
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+};
+
+//...when we delete something we want only the id
+export const deleteBookmark = function (id) {
+  // Delete bookmark
+  const index = state.bookmarks.findIndex(el => el.id === id);
+  state.bookmarks.splice(index, 1);
+
+  // Mark current recipe as not bookmarked
+  if (id === state.recipe.id) state.recipe.bookmarked = false;
 };

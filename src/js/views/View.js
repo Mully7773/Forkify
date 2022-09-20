@@ -27,13 +27,13 @@ export default class View {
     const newElements = Array.from(newDOM.querySelectorAll('*'));
     // console.log(newElements);
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-    console.log(curElements);
-    console.log(newElements);
+    // console.log(curElements);
+    // console.log(newElements);
 
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
       // isEqualNode compares the content of both curEl and newEl
-      console.log(curEl, newEl.isEqualNode(curEl));
+      // console.log(curEl, newEl.isEqualNode(curEl));
 
       // child node contains the text
       // Updates changed Text
