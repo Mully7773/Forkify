@@ -59,7 +59,8 @@ const controlSearchResults = async function () {
     // Render results
     // console.log(model.state.search.results);
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(1));
+    // give getSearchResultsPage a '1' so that we always start at page 1, or see model
+    resultsView.render(model.getSearchResultsPage());
 
     //Render initial pagination buttons
     paginationView.render(model.state.search);
@@ -90,10 +91,17 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+const controlAddBookmark = function () {
+  model.addBookmark(model.state.recipe);
+  console.log(model.state.recipe);
+};
+
 // Publisher/Subscriber Pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  // When we click the bookmark button, we push that recipe into the bookmarks array
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
