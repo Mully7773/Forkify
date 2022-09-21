@@ -3,6 +3,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 // Polyfilling everything else
 import 'core-js/stable';
@@ -34,6 +35,9 @@ const controlRecipes = async function () {
 
     // Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+
+    // So that the selected bookmark remains highlighted
+    bookmarksView.update(model.state.bookmarks);
 
     // Loading recipe
     // async function returns a promise that we need to handle whenever we call that async function
@@ -92,13 +96,18 @@ const controlServings = function (newServings) {
 };
 
 const controlAddBookmark = function () {
+  // Add/remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
   else {
     model.deleteBookmark(model.state.recipe.id);
   }
 
-  console.log(model.state.recipe);
+  // Update recipeView
+  // console.log(model.state.recipe);
   recipeView.update(model.state.recipe);
+
+  // Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 
 // Publisher/Subscriber Pattern
