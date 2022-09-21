@@ -1,4 +1,4 @@
-// Parent of resultsView and bookmarksView
+// sort of child of resultsView and bookmarksView
 import icons from 'url:../../img/icons.svg';
 import View from './View.js';
 

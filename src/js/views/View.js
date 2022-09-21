@@ -9,8 +9,10 @@ export default class View {
       return this.renderError();
 
     this._data = data;
+
     const markup = this._generateMarkup();
 
+    // if render is set to true (default), this function will render the markup to the DOM; however, when it is set to false as below, it only RETURNS markup (kind of like a switch for a different setting)
     if (!render) return markup;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
