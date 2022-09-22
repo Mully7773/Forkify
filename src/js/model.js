@@ -86,7 +86,12 @@ export const updateServings = function (newServings) {
 };
 
 const persistBookmarks = function () {
-  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+  // Users can disable localStorage under browser settings, so wrap in try catch block
+  try {
+    localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+  } catch (err) {
+    console.error(err, 'localStorage disabled - cannot use bookmarks');
+  }
 };
 
 // Common programming pattern - when we add something we want all the data, and...
