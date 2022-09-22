@@ -30,6 +30,17 @@ class AddRecipeView extends View {
     this._overlay.addEventListener('click', this.toggleWindow.bind(this));
   }
 
+  addHandlerUpload(handler) {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // FormData returns an object, but we spread it out into an array, which contains all the form fields with all the values
+      const dataArray = [...new FormData(this)];
+      //   fromEntries is basically the opposite of the 'entries' method that is available on arrays - takes an array of entries and converts it to an object
+      const data = Object.fromEntries(dataArray);
+      handler(data);
+    });
+  }
+
   _generateMarkup() {}
 }
 
