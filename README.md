@@ -7,7 +7,7 @@ A recipe search application which fetches data from the forkify API (https://for
 
 ## Link
 
-Visit the website here: https://mully7773.github.io/Forkify/
+Visit the website here: https://forkify-nickm.netlify.app
 
 ## Screenshots
 
